@@ -7,8 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
+import com.example.user.api.APIInterface;
+import com.example.user.api.App;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -25,6 +30,10 @@ import com.google.android.gms.tasks.Task;
 
 
 import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -91,6 +100,53 @@ public class SignInActivity extends AppCompatActivity {
                 // App code
             }
         });
+
+        //login button
+        final EditText email=findViewById(R.id.emailEditText);
+        final EditText password=findViewById(R.id.passwordEditText);
+        Button login=findViewById(R.id.loginButton);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                APIInterface apiInterface= App.getClient().create(APIInterface.class);
+                apiInterface.login(email.toString(),password.toString()).enqueue(new Callback<Boolean>() {
+                    @Override
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+
+                        Boolean flag=response.body();
+
+                        if(flag==true){
+                            Intent intent=new Intent(SignInActivity.this,HomeMerchantActivity.class);
+                            startActivity(intent);
+
+                        }
+                        else{
+                            Toast.makeText(SignInActivity.this,"wrong password ",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Boolean> call, Throwable t) {
+                        Toast.makeText(SignInActivity.this,"server error",Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            }
+        });
+
+        //create new user
+        Button createNewUser=findViewById(R.id.newUser);
+        createNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignInActivity.this,NewUserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
 
