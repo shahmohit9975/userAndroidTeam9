@@ -13,5 +13,7 @@
     <string name="verifyOtp">VERIFY OTP</string>
     <string name="repassword">RE-PASSWORD</string>
     <string name="create">CREATE</string>
+    <string name="name">NAME</string>
+    <string name="address">ADDRESS</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>

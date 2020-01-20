@@ -12,17 +12,19 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.pogo.LoginDetails;
+import com.example.user.pogo.VerifyOtp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewUserActivity extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_user);
+        setContentView(R.layout.activity_forgot_password);
 
         final EditText email=findViewById(R.id.emailEditText);
         final EditText password=findViewById(R.id.passwordEditText);
@@ -39,22 +41,24 @@ public class NewUserActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 APIInterface apiInterface= App.getClient().create(APIInterface.class);
-                apiInterface.sendotp(email.toString()).enqueue(new Callback<Boolean>() {
+                LoginDetails loginDetails=new LoginDetails();
+                loginDetails.setEmail(email.toString());
+                apiInterface.sendotp(loginDetails).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if(response.body()) {
-                            Toast.makeText(NewUserActivity.this, "server call success", Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgotPasswordActivity.this, "server call success", Toast.LENGTH_LONG).show();
                             otpButton.setVisibility(View.INVISIBLE);
                             verButton.setVisibility(View.VISIBLE);
                             otp.setVisibility(View.VISIBLE);
                         }
                         else
-                            Toast.makeText(NewUserActivity.this,"server error",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(NewUserActivity.this,"server error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -66,7 +70,10 @@ public class NewUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 APIInterface apiInterface=App.getClient().create(APIInterface.class);
-                apiInterface.verifyOtp(otp.toString()).enqueue(new Callback<Boolean>() {
+                VerifyOtp verifyOtp=new VerifyOtp();
+                verifyOtp.setOtp(otp.toString());
+
+                apiInterface.verifyOtp(verifyOtp).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                         if(response.body()){
@@ -80,13 +87,13 @@ public class NewUserActivity extends AppCompatActivity {
                             email.setFocusable(false);
                         }
                         else {
-                            Toast.makeText(NewUserActivity.this,"wrong otp",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgotPasswordActivity.this,"wrong otp",Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(NewUserActivity.this,"server error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -100,22 +107,25 @@ public class NewUserActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(password.toString().equals(repassword.toString())){
                     APIInterface apiInterface=App.getClient().create(APIInterface.class);
-                    apiInterface.create(email.toString(),password.toString()).enqueue(new Callback<Boolean>() {
+                    LoginDetails loginDetails=new LoginDetails();
+                    loginDetails.setEmail(email.toString());
+                    loginDetails.setPasssword(password.toString());
+                    apiInterface.create(loginDetails).enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(response.body()){
-                                Toast.makeText(NewUserActivity.this,"new user created",Toast.LENGTH_LONG).show();
-                                Intent intent=new Intent(NewUserActivity.this,HomeMerchantActivity.class);
+                                Toast.makeText(ForgotPasswordActivity.this,"new user created",Toast.LENGTH_LONG).show();
+                                Intent intent=new Intent(ForgotPasswordActivity.this,HomeMerchantActivity.class);
                                 startActivity(intent);
                             }
                             else {
-                                Toast.makeText(NewUserActivity.this,"server error",Toast.LENGTH_LONG).show();
+                                Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Boolean> call, Throwable t) {
-                            Toast.makeText(NewUserActivity.this,"server error",Toast.LENGTH_LONG).show();
+                            Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
 
                         }
                     });

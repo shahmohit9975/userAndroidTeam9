@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.pogo.LoginDetails;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -77,6 +79,7 @@ public class SignInActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         //facebook
+
         facebookSignIn = (LoginButton) findViewById(R.id.facebookSignIn);
         facebookSignIn.setReadPermissions(Arrays.asList(EMAIL));
         // If you are using in a fragment, call loginButton.setFragment(this);
@@ -101,16 +104,21 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
+
+
         //login button
         final EditText email=findViewById(R.id.emailEditText);
         final EditText password=findViewById(R.id.passwordEditText);
-        Button login=findViewById(R.id.loginButton);
+        final Button login=findViewById(R.id.loginButton);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 APIInterface apiInterface= App.getClient().create(APIInterface.class);
-                apiInterface.login(email.toString(),password.toString()).enqueue(new Callback<Boolean>() {
+                LoginDetails loginDetails=new LoginDetails();
+                loginDetails.setEmail(email.toString());
+                loginDetails.setPasssword(email.toString());
+                apiInterface.login(loginDetails).enqueue(new Callback<Boolean>() {
                     @Override
                     public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
@@ -140,15 +148,18 @@ public class SignInActivity extends AppCompatActivity {
         createNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignInActivity.this,NewUserActivity.class);
+                Intent intent=new Intent(SignInActivity.this, UserCreateActivity.class);
                 startActivity(intent);
             }
         });
-
-
-
-
-
+        //forgot password
+        TextView forgotPassword=findViewById(R.id.forotPasswordTextView);
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignInActivity.this, ForgotPasswordActivity.class);
+            }
+        });
 
     }
     private void signIn(){
