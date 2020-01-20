@@ -16,7 +16,13 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
+                // If you're using a version of Gradle lower than 4.1, you must instead use:
+                {
+                    url 'https://maven.google.com'
+                }
+
         jcenter()
         
     }
