@@ -1,19 +1,27 @@
 package com.example.user.api;
 
-import com.example.user.UserDetails;
+import com.example.user.pogo.GetOtp;
+import com.example.user.pogo.LoginResponse;
+import com.example.user.pogo.UserDetails;
+import com.example.user.pogo.BooleanResponse;
 import com.example.user.pogo.LoginDetails;
 import com.example.user.pogo.VerifyOtp;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 public interface APIInterface {
 
-    @GET("/login")
-    Call<Boolean> login(@Body LoginDetails loginDetails);
+    @GET("https://api.myjson.com/bins/ygca2")
+    Call<LoginResponse> login();
+
+    @GET("https://api.myjson.com/bins/17n256")
+    Call<UserDetails> userdetails();
 
     @GET("/google/login")
     Call<Boolean> glogin();
@@ -22,15 +30,15 @@ public interface APIInterface {
     Call<Boolean> flogin();
 
     @GET("/sendotp")
-    Call<Boolean> sendotp(@Body LoginDetails loginDetails);
+    Call<BooleanResponse> sendotp(@Body GetOtp getOtp);
 
     @GET("/verifyotp")
-    Call<Boolean> verifyOtp(@Body VerifyOtp verifyOtp);
+    Call<BooleanResponse> verifyOtp(@Body VerifyOtp verifyOtp);
 
-    @POST
+    @POST("/create")
     Call<Boolean> create(@Body LoginDetails loginDetails);
 
-    @POST
-    Call<Boolean> createnewuser(@Body UserDetails userDetails);
+    @POST("/user/addProfile")
+    Call<Response<Boolean>> createnewuser(@Body UserDetails userDetails);
 
 }

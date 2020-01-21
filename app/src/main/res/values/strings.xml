@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Home</string>
-    <string name="email">EMAIL</string>
-    <string name="password">PASSWORD</string>
+    <string name="userEmail">EMAIL</string>
+    <string name="userPassword">PASSWORD</string>
     <string name="login">LOGIN</string>
     <string name="forgotPassword">Forgot Password??</string>
     <string name="newAccount">New? Create Account</string>
@@ -14,6 +14,10 @@
     <string name="repassword">RE-PASSWORD</string>
     <string name="create">CREATE</string>
     <string name="name">NAME</string>
-    <string name="address">ADDRESS</string>
+    <string name="userAddress">ADDRESS</string>
+    <string name="proceedToPay">Proceed To Pay</string>
+    <string name="welcome">WELCOME</string>
+    <string name="logout">LOGOUT</string>
+    <string name="image">IMAGE URL</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>

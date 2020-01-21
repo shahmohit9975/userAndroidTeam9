@@ -3,7 +3,9 @@ package com.example.user;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,12 +17,11 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.pogo.BooleanResponse;
 import com.example.user.pogo.LoginDetails;
+import com.example.user.pogo.LoginResponse;
 import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 
-import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -31,8 +32,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 
-import java.util.Arrays;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,8 +39,8 @@ import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private int RC_SIGN_IN=9022;
-    private String TAG="coviam";
+    private int RC_SIGN_IN = 9022;
+    private String TAG = "coviam";
     GoogleSignInClient mGoogleSignInClient;
     private CallbackManager callbackManager;
     private static final String EMAIL = "email";
@@ -54,8 +53,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        googleSignIn =findViewById(R.id.googleSignIn);
-        facebookSignIn=findViewById(R.id.facebookSignIn);
+        googleSignIn = findViewById(R.id.googleSignIn);
+        facebookSignIn = findViewById(R.id.facebookSignIn);
 
         googleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +78,7 @@ public class SignInActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         //facebook
+        /*
 
         facebookSignIn = (LoginButton) findViewById(R.id.facebookSignIn);
         facebookSignIn.setReadPermissions(Arrays.asList(EMAIL));
@@ -103,40 +103,46 @@ public class SignInActivity extends AppCompatActivity {
                 // App code
             }
         });
-
+        */
 
 
         //login button
-        final EditText email=findViewById(R.id.emailEditText);
-        final EditText password=findViewById(R.id.passwordEditText);
-        final Button login=findViewById(R.id.loginButton);
+        final EditText email = findViewById(R.id.emailEditText);
+        final EditText password = findViewById(R.id.passwordEditText);
+        final Button login = findViewById(R.id.loginButton);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APIInterface apiInterface= App.getClient().create(APIInterface.class);
-                LoginDetails loginDetails=new LoginDetails();
-                loginDetails.setEmail(email.toString());
-                loginDetails.setPasssword(email.toString());
-                apiInterface.login(loginDetails).enqueue(new Callback<Boolean>() {
+                APIInterface apiInterface = App.getClient().create(APIInterface.class);
+                LoginDetails loginDetails = new LoginDetails();
+                loginDetails.setUserEmail(email.toString());
+                loginDetails.setUserPasssword(password.toString());
+                apiInterface.login().enqueue(new Callback<LoginResponse>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        LoginResponse loginResponse=new LoginResponse();
+                        if (null != loginResponse) {
+                            if (loginResponse.getUserName().equals("true")) {
+                                SharedPreferences sharedPreferences=getSharedPreferences("com.user.application", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor=sharedPreferences.edit();
+                                editor.putString("email",email.toString());
+                                editor.commit();
+                                editor.apply();
+                                Intent intent = new Intent(SignInActivity.this, UserDetailsActivity.class);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(SignInActivity.this, "wrong password ", Toast.LENGTH_LONG).show();
 
-                        Boolean flag=response.body();
-
-                        if(flag==true){
-                            Intent intent=new Intent(SignInActivity.this,HomeMerchantActivity.class);
-                            startActivity(intent);
-
+                            }
                         }
-                        else{
-                            Toast.makeText(SignInActivity.this,"wrong password ",Toast.LENGTH_LONG).show();
-                        }
+
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(SignInActivity.this,"server error",Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        Toast.makeText(SignInActivity.this, "server error", Toast.LENGTH_LONG).show();
 
                     }
                 });
@@ -144,39 +150,41 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         //create new user
-        Button createNewUser=findViewById(R.id.newUser);
+        Button createNewUser = findViewById(R.id.newUser);
         createNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignInActivity.this, UserCreateActivity.class);
+                Intent intent = new Intent(SignInActivity.this, UserCreateActivity.class);
                 startActivity(intent);
             }
         });
         //forgot password
-        TextView forgotPassword=findViewById(R.id.forotPasswordTextView);
+        TextView forgotPassword = findViewById(R.id.forgotPasswordTextView);
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(SignInActivity.this, ForgotPasswordActivity.class);
+                Intent intent = new Intent(SignInActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
 
     }
-    private void signIn(){
-        Intent signInIntent=mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent,RC_SIGN_IN);
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        //callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-            callbackManager.onActivityResult(requestCode,resultCode,data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
 
         }
     }
@@ -184,7 +192,7 @@ public class SignInActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Intent intent=new Intent(SignInActivity.this,DummyActivity.class);
+            Intent intent = new Intent(SignInActivity.this, DummyActivity.class);
             startActivity(intent);
         } catch (ApiException e) {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());

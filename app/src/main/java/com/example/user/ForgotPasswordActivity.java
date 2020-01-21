@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.pogo.BooleanResponse;
+import com.example.user.pogo.GetOtp;
 import com.example.user.pogo.LoginDetails;
 import com.example.user.pogo.VerifyOtp;
 
@@ -41,12 +43,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 APIInterface apiInterface= App.getClient().create(APIInterface.class);
-                LoginDetails loginDetails=new LoginDetails();
-                loginDetails.setEmail(email.toString());
-                apiInterface.sendotp(loginDetails).enqueue(new Callback<Boolean>() {
+                GetOtp getOtp=new GetOtp();
+                getOtp.setEmail(email.toString());
+                apiInterface.sendotp(getOtp).enqueue(new Callback<BooleanResponse>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if(response.body()) {
+                    public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
+                        if(response.body().getFlag().equals("true")) {
                             Toast.makeText(ForgotPasswordActivity.this, "server call success", Toast.LENGTH_LONG).show();
                             otpButton.setVisibility(View.INVISIBLE);
                             verButton.setVisibility(View.VISIBLE);
@@ -57,7 +59,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<BooleanResponse> call, Throwable t) {
                         Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
 
                     }
@@ -65,7 +67,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
             }
         });
-
+        /*
         verButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,14 +104,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             }
         });
 
+         */
+
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(password.toString().equals(repassword.toString())){
                     APIInterface apiInterface=App.getClient().create(APIInterface.class);
                     LoginDetails loginDetails=new LoginDetails();
-                    loginDetails.setEmail(email.toString());
-                    loginDetails.setPasssword(password.toString());
+                    loginDetails.setUserEmail(email.toString());
+                    loginDetails.setUserPasssword(password.toString());
                     apiInterface.create(loginDetails).enqueue(new Callback<Boolean>() {
                         @Override
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {

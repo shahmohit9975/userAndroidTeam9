@@ -7,12 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.pogo.UserDetails;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,12 +23,13 @@ public class UserCreateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_user);
+        setContentView(R.layout.activity_user_create);
 
         final EditText name=findViewById(R.id.nameEditText);
         final EditText password=findViewById(R.id.passwordEditText);
         final EditText email=findViewById(R.id.emailEditText);
         final EditText address=findViewById(R.id.addressEditText);
+        final EditText imageurl=findViewById(R.id.imageTextView);
 
         Button create=findViewById(R.id.create);
 
@@ -37,26 +39,22 @@ public class UserCreateActivity extends AppCompatActivity {
                 APIInterface apiInterface= App.getClient().create(APIInterface.class);
 
                 UserDetails userDetails=new UserDetails();
-                userDetails.setName(name.toString());
-                userDetails.setEmail(email.toString());
-                userDetails.setAddress(address.toString());
-                userDetails.setPassword(password.toString());
+                userDetails.setUserName(name.toString());
+                userDetails.setUserEmail(email.toString());
+                userDetails.setUserAddress(address.toString());
+                userDetails.setUserPassword(password.toString());
+                userDetails.setImage(imageurl.toString());
 
-                apiInterface.createnewuser(userDetails).enqueue(new Callback<Boolean>() {
+                apiInterface.createnewuser(userDetails).enqueue(new Callback<Response<Boolean>>() {
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
+                    public void onResponse(Call<Response<Boolean>> call, Response<Response<Boolean>> response) {
                         Toast.makeText(UserCreateActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(UserCreateActivity.this,HomeMerchantActivity.class);
                         startActivity(intent);
-
-
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-
-                        Toast.makeText(UserCreateActivity.this,"wrong password ",Toast.LENGTH_SHORT).show();
+                    public void onFailure(Call<Response<Boolean>> call, Throwable t) {
 
                     }
                 });

@@ -12,7 +12,7 @@ public class App {
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         retrofit=new Retrofit.Builder()
-                .baseUrl("https://api.androidhive.info")
+                .baseUrl("http://10.177.7.62:8080")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

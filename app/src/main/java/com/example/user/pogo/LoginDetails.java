@@ -7,34 +7,34 @@ import java.io.Serializable;
 
 public class LoginDetails implements Serializable {
 
-	@SerializedName("passsword")
-	private String passsword;
+	@SerializedName("userPasssword")
+	private String userPasssword;
 
-	@SerializedName("email")
-	private String email;
+	@SerializedName("userEmail")
+	private String userEmail;
 
-	public void setPasssword(String passsword){
-		this.passsword = passsword;
+	public void setUserPasssword(String userPasssword){
+		this.userPasssword = userPasssword;
 	}
 
-	public String getPasssword(){
-		return passsword;
+	public String getUserPasssword(){
+		return userPasssword;
 	}
 
-	public void setEmail(String email){
-		this.email = email;
+	public void setUserEmail(String userEmail){
+		this.userEmail = userEmail;
 	}
 
-	public String getEmail(){
-		return email;
+	public String getUserEmail(){
+		return userEmail;
 	}
 
 	@Override
  	public String toString(){
 		return 
 			"LoginDetails{" + 
-			"passsword = '" + passsword + '\'' + 
-			",email = '" + email + '\'' + 
+			"userPasssword = '" + userPasssword + '\'' +
+			",userEmail = '" + userEmail + '\'' +
 			"}";
 		}
 }
