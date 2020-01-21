@@ -7,18 +7,18 @@ import java.io.Serializable;
 
 public class LoginDetails implements Serializable {
 
-	@SerializedName("userPasssword")
-	private String userPasssword;
+	@SerializedName("userPassword")
+	private String userPassword;
 
 	@SerializedName("userEmail")
 	private String userEmail;
 
 	public void setUserPasssword(String userPasssword){
-		this.userPasssword = userPasssword;
+		this.userPassword = userPasssword;
 	}
 
 	public String getUserPasssword(){
-		return userPasssword;
+		return userPassword;
 	}
 
 	public void setUserEmail(String userEmail){
@@ -33,7 +33,7 @@ public class LoginDetails implements Serializable {
  	public String toString(){
 		return 
 			"LoginDetails{" + 
-			"userPasssword = '" + userPasssword + '\'' +
+			"userPasssword = '" + userPassword + '\'' +
 			",userEmail = '" + userEmail + '\'' +
 			"}";
 		}

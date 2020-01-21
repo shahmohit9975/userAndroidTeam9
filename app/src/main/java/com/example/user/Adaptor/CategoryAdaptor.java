@@ -1,0 +1,59 @@
+package com.example.user.Adaptor;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.user.R;
+import com.example.user.pogo.GetCategories;
+
+import java.util.List;
+
+public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHolder> {
+
+    static List<GetCategories> responseList;
+
+    public CategoryAdaptor(List<GetCategories> list) {
+        this.responseList=list;
+    }
+
+    @NonNull
+    @Override
+    public CategoryAdaptor.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View listItem= layoutInflater.inflate(R.layout.category_view, parent, false);
+        ViewHolder viewHolder = new ViewHolder(listItem);
+        return viewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull CategoryAdaptor.ViewHolder holder, int position) {
+
+        holder.categoryName.setText(responseList.get(position).getCategoryName());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return responseList.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+
+        LinearLayout linearLayout;
+        EditText categoryName;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            linearLayout=(LinearLayout)itemView.findViewById(R.id.categoryLinear);
+            categoryName=(EditText)itemView.findViewById(R.id.categoriesEdit);
+        }
+    }
+}

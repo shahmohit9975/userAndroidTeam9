@@ -23,6 +23,8 @@ import retrofit2.Response;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
+    int otpValue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,10 +47,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 APIInterface apiInterface= App.getClient().create(APIInterface.class);
                 GetOtp getOtp=new GetOtp();
                 getOtp.setEmail(email.toString());
-                apiInterface.sendotp(getOtp).enqueue(new Callback<BooleanResponse>() {
+
+                apiInterface.sendotp(getOtp).enqueue(new Callback<VerifyOtp>() {
                     @Override
-                    public void onResponse(Call<BooleanResponse> call, Response<BooleanResponse> response) {
-                        if(response.body().getFlag().equals("true")) {
+                    public void onResponse(Call<VerifyOtp> call, Response<VerifyOtp> response) {
+                        /*if(response.body()) {
                             Toast.makeText(ForgotPasswordActivity.this, "server call success", Toast.LENGTH_LONG).show();
                             otpButton.setVisibility(View.INVISIBLE);
                             verButton.setVisibility(View.VISIBLE);
@@ -56,10 +59,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         }
                         else
                             Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
+
+                         */
+                        otpButton.setVisibility(View.INVISIBLE);
+                        verButton.setVisibility(View.VISIBLE);
+                        otp.setVisibility(View.VISIBLE);
+                        //otpValue=response.body().getOtp();
+
+
                     }
 
                     @Override
-                    public void onFailure(Call<BooleanResponse> call, Throwable t) {
+                    public void onFailure(Call<VerifyOtp> call, Throwable t) {
                         Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
 
                     }
@@ -67,44 +78,18 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
             }
         });
-        /*
+
         verButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APIInterface apiInterface=App.getClient().create(APIInterface.class);
-                VerifyOtp verifyOtp=new VerifyOtp();
-                verifyOtp.setOtp(otp.toString());
-
-                apiInterface.verifyOtp(verifyOtp).enqueue(new Callback<Boolean>() {
-                    @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                        if(response.body()){
-                            verButton.setVisibility(View.INVISIBLE);
-                            otp.setVisibility(View.INVISIBLE);
-                            password.setVisibility(View.VISIBLE);
-                            repassword.setVisibility(View.VISIBLE);
-                            create.setVisibility(View.VISIBLE);
-                            passwordText.setVisibility(View.VISIBLE);
-                            repasswordText.setVisibility(View.VISIBLE);
-                            email.setFocusable(false);
-                        }
-                        else {
-                            Toast.makeText(ForgotPasswordActivity.this,"wrong otp",Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
-                        Toast.makeText(ForgotPasswordActivity.this,"server error",Toast.LENGTH_LONG).show();
-
-                    }
-                });
-
-
+                int check=Integer.parseInt(otp.getText().toString());
+                if(otpValue==check){
+                    passwordText.setVisibility(View.VISIBLE);
+                    repasswordText.setVisibility(View.VISIBLE);
+                    create.setVisibility(View.VISIBLE);
+                }
             }
         });
-
-         */
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +104,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(response.body()){
                                 Toast.makeText(ForgotPasswordActivity.this,"new user created",Toast.LENGTH_LONG).show();
-                                Intent intent=new Intent(ForgotPasswordActivity.this,HomeMerchantActivity.class);
+                                Intent intent=new Intent(ForgotPasswordActivity.this,HomeMerchantGeneral.class);
                                 startActivity(intent);
                             }
                             else {

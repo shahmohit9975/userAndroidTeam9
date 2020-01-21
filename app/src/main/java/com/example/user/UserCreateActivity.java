@@ -49,7 +49,7 @@ public class UserCreateActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Response<Boolean>> call, Response<Response<Boolean>> response) {
                         Toast.makeText(UserCreateActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(UserCreateActivity.this,HomeMerchantActivity.class);
+                        Intent intent=new Intent(UserCreateActivity.this,HomeMerchantGeneral.class);
                         startActivity(intent);
                     }
 

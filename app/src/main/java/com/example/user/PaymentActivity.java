@@ -7,22 +7,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class HomeMerchantActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_merchant);
+        setContentView(R.layout.activity_payment);
 
-        Button button=findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        Button pay=findViewById(R.id.payment);
+        pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeMerchantActivity.this,UserDetailsActivity.class);
+                Intent intent=new Intent(PaymentActivity.this,HomeMerchantGeneral.class);
                 startActivity(intent);
+                finish();
             }
         });
-
     }
 }

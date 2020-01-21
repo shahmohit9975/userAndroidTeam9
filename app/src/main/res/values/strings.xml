@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Home</string>
+    <string name="app_name">T9</string>
     <string name="userEmail">EMAIL</string>
     <string name="userPassword">PASSWORD</string>
     <string name="login">LOGIN</string>
@@ -19,5 +19,8 @@
     <string name="welcome">WELCOME</string>
     <string name="logout">LOGOUT</string>
     <string name="image">IMAGE URL</string>
+    <string name="search_text">search</string>
+    <string name="order_details">ORDER DETAILS</string>
+    <string name="pay">PAY NOW</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>

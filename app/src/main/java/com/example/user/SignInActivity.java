@@ -19,6 +19,7 @@ import com.example.user.api.APIInterface;
 import com.example.user.api.App;
 import com.example.user.pogo.BooleanResponse;
 import com.example.user.pogo.LoginDetails;
+import com.example.user.pogo.LoginRes;
 import com.example.user.pogo.LoginResponse;
 import com.facebook.CallbackManager;
 
@@ -115,37 +116,41 @@ public class SignInActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                APIInterface apiInterface = App.getClient().create(APIInterface.class);
-                LoginDetails loginDetails = new LoginDetails();
-                loginDetails.setUserEmail(email.toString());
-                loginDetails.setUserPasssword(password.toString());
-                apiInterface.login().enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        LoginResponse loginResponse=new LoginResponse();
-                        if (null != loginResponse) {
-                            if (loginResponse.getUserName().equals("true")) {
-                                SharedPreferences sharedPreferences=getSharedPreferences("com.user.application", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putString("email",email.toString());
-                                editor.commit();
-                                editor.apply();
-                                Intent intent = new Intent(SignInActivity.this, UserDetailsActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(SignInActivity.this, "wrong password ", Toast.LENGTH_LONG).show();
 
-                            }
+
+                LoginDetails loginDetails = new LoginDetails();
+                loginDetails.setUserEmail(email.getText().toString());
+                loginDetails.setUserPasssword(password.getText().toString());
+                APIInterface apiInterface = App.getClient().create(APIInterface.class);
+
+                apiInterface.login(loginDetails).enqueue(new Callback<LoginRes>() {
+                    @Override
+                    public void onResponse(Call<LoginRes> call, Response<LoginRes> response) {
+
+                        LoginRes loginRes=response.body();
+                        if(loginRes.isLoginStatus()){
+                            Intent intent=new Intent(SignInActivity.this,HomeMerchantGeneral.class);
+                            startActivity(intent);
+                            Toast.makeText(SignInActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(SignInActivity.this,"wrong password!!! ",Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        Toast.makeText(SignInActivity.this, "server error", Toast.LENGTH_LONG).show();
+                    public void onFailure(Call<LoginRes> call, Throwable t) {
+
+                        Toast.makeText(SignInActivity.this,"fail!!! ",Toast.LENGTH_SHORT).show();
+
 
                     }
                 });
+
+
+
             }
         });
 
@@ -154,7 +159,7 @@ public class SignInActivity extends AppCompatActivity {
         createNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this, UserCreateActivity.class);
+                Intent intent = new Intent(SignInActivity.this, EmailVerificationActivity.class);
                 startActivity(intent);
             }
         });

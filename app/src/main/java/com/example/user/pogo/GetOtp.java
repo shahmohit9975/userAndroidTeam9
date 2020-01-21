@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class GetOtp implements Serializable {
 
-	@SerializedName("email")
+	@SerializedName("userEmail")
 	private String email;
 
 	public void setEmail(String email){

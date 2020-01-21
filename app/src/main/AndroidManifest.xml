@@ -2,22 +2,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/t9logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EmailVerificationActivity"></activity>
+        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".EmailVerificationActivity" />
         <activity android:name=".UserDetailsActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".UserCreateActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".DummyActivity" />
         <activity android:name=".SignInActivity" />
+        <activity android:name=".HomeMerchantGeneral" />
+        <activity android:name=".MovieAdapter" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashScreen">
@@ -47,10 +51,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name=".HomeMerchantActivity"
-            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

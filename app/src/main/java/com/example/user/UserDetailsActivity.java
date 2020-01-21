@@ -36,6 +36,7 @@ public class UserDetailsActivity extends AppCompatActivity {
                 email.setText(userDetails.getUserEmail().toString());
                 address.setText(userDetails.getUserAddress().toString());
 
+
             }
 
             @Override
