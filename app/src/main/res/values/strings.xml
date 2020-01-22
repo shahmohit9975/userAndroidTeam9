@@ -22,5 +22,6 @@
     <string name="search_text">search</string>
     <string name="order_details">ORDER DETAILS</string>
     <string name="pay">PAY NOW</string>
+    <string name="sellPrice">Sell Price</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>

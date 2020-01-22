@@ -1,9 +1,13 @@
 package com.example.user.api;
 
+import androidx.cardview.widget.CardView;
+
 import com.example.user.pogo.GetCategories;
 import com.example.user.pogo.GetOtp;
 import com.example.user.pogo.LoginRes;
 import com.example.user.pogo.LoginResponse;
+import com.example.user.pogo.PopularProducts;
+import com.example.user.pogo.ProductReact;
 import com.example.user.pogo.UserDetails;
 import com.example.user.pogo.BooleanResponse;
 import com.example.user.pogo.LoginDetails;
@@ -45,7 +49,15 @@ public interface APIInterface {
     @POST("/user/addProfile")
     Call<Response<Boolean>> createnewuser(@Body UserDetails userDetails);
 
-    @GET("/category/getAll")
+    @GET("/bins/1eg5iu")
     Call<List<GetCategories>> getCategories();
 
+    @GET("/bins/11b47a")
+    Call<List<PopularProducts>> getPopular();
+
+    @GET("/bins/11b47a")
+    Call<List<PopularProducts>> getCategoryProducts();
+
+    @POST("/get/prod")
+    Call<PopularProducts> getProductInfo(ProductReact productReact);
 }

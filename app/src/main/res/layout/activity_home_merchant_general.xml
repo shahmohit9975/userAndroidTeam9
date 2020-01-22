@@ -16,13 +16,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/categories"
-        android:layout_width="295dp"
-        android:layout_height="76dp"
+        android:layout_width="397dp"
+        android:layout_height="41dp"
         android:gravity="center"
         android:text="Categories"
-        android:textSize="50sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/recycler1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,38 +34,38 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"
-        android:layout_width="408dp"
-        android:layout_height="135dp"
+        android:layout_width="406dp"
+        android:layout_height="169dp"
         android:layout_marginBottom="32dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/toppicks"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:reverseLayout="true" />
 
     <TextView
         android:id="@+id/toppicks"
-        android:layout_width="316dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="398dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="36dp"
         android:gravity="center"
         android:text="Top Picks"
-        android:textSize="50sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/recycler2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.129"
+        app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"></TextView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler2"
-        android:layout_width="408dp"
-        android:layout_height="132dp"
-        android:layout_marginBottom="96dp"
+        android:layout_width="412dp"
+        android:layout_height="238dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

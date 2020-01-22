@@ -16,10 +16,13 @@ import java.util.List;
 
 public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHolder> {
 
+    CategoryCommunication categoryCommunication;
+
     static List<GetCategories> responseList;
 
-    public CategoryAdaptor(List<GetCategories> list) {
+    public CategoryAdaptor(List<GetCategories> list,CategoryCommunication categoryCommunication) {
         this.responseList=list;
+        this.categoryCommunication=categoryCommunication;
     }
 
     @NonNull
@@ -33,7 +36,14 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryAdaptor.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryAdaptor.ViewHolder holder, final int position) {
+
+        holder.categoryName.getRootView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                categoryCommunication.onClick(responseList.get(position));
+            }
+        });
 
         holder.categoryName.setText(responseList.get(position).getCategoryName());
 
@@ -55,5 +65,9 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
             linearLayout=(LinearLayout)itemView.findViewById(R.id.categoryLinear);
             categoryName=(EditText)itemView.findViewById(R.id.categoriesEdit);
         }
+    }
+
+    public interface CategoryCommunication{
+        void onClick(GetCategories getCategories);
     }
 }

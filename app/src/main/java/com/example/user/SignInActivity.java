@@ -132,6 +132,12 @@ public class SignInActivity extends AppCompatActivity {
                             Intent intent=new Intent(SignInActivity.this,HomeMerchantGeneral.class);
                             startActivity(intent);
                             Toast.makeText(SignInActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
+                            SharedPreferences sharedPreferences=getSharedPreferences("email access",Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            editor.putBoolean("flag",true);
+                            editor.putString("email",email.getText().toString());
+                            editor.commit();
+                            editor.apply();
                         }
                         else {
                             Toast.makeText(SignInActivity.this,"wrong password!!! ",Toast.LENGTH_SHORT).show();

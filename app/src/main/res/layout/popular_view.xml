@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/popularLinear"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        card_view:cardBackgroundColor="@color/card"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:cardUseCompatPadding="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:id="@+id/popularImage"
+                android:layout_width="160dp"
+                android:layout_height="160dp">
+
+            </ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/popularName"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_height="32dp"></TextView>
+                <TextView
+                    android:id="@+id/popularPrice"
+                    android:layout_width="match_parent"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_height="40dp"></TextView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/ratingView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/sellPrice"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        ></TextView>
+                    <TextView
+                        android:id="@+id/sellPrice"
+                        android:layout_width="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"></TextView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
