@@ -23,5 +23,7 @@
     <string name="order_details">ORDER DETAILS</string>
     <string name="pay">PAY NOW</string>
     <string name="sellPrice">Sell Price</string>
+    <string name="merchantRating">RATINGS</string>
+    <string name="AddToCart">ADD TO CART</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>
