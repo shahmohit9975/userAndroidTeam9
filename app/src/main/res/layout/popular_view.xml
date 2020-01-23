@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/popularLinear"
+    android:id="@+id/orderLinear"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -45,18 +45,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-                    <TextView
+                    <RatingBar
                         android:id="@+id/ratingView"
+                        style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="@string/sellPrice"
-                        android:layout_margin="8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
                         android:gravity="center"
-                        ></TextView>
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:padding="4dp"
+                        android:stepSize="0.1"
+                        android:text="@string/sellPrice"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"></RatingBar>
                     <TextView
                         android:id="@+id/sellPrice"
                         android:layout_width="match_parent"
-                        android:layout_margin="8dp"
+                        android:layout_margin="4dp"
                         android:layout_height="match_parent"
                         android:gravity="center"></TextView>
 

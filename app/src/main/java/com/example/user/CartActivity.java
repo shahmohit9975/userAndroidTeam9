@@ -9,8 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.user.pogo.LoginResponse;
-
 public class CartActivity extends AppCompatActivity {
 
     @Override
@@ -27,8 +25,8 @@ public class CartActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences=getSharedPreferences("com.user.application", Context.MODE_PRIVATE);
                 if(sharedPreferences!=null) {
                     if (!sharedPreferences.getString("email",null).isEmpty()){
-                        Intent intent=new Intent(CartActivity.this, PaymentActivity.class);
-                        startActivity(intent);
+                        Intent intent=new Intent(CartActivity.this, FinishActivity.class);
+                        startActivity(intent);//add bundle
                         finish();
                     }
                     else{

@@ -11,8 +11,7 @@ import android.widget.TextView;
 import com.example.user.Adaptor.CategoryDisplayAdaptor;
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.GetCategories;
-import com.example.user.pogo.PopularProducts;
+import com.example.user.pojo.PopularProducts;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class CategoryDisplayActivity extends AppCompatActivity implements Catego
         Bundle bundle=intent.getExtras();
         String categoryName=bundle.getString("name");
         String categoryId=bundle.getString("id");
-        TextView textView =findViewById(R.id.categoriesEdit);
+        TextView textView =findViewById(R.id.merchantEdit);
         textView.setText(categoryName);
 
         //create object for category Response
@@ -73,6 +72,15 @@ public class CategoryDisplayActivity extends AppCompatActivity implements Catego
         b.putString("catName",popularProducts.getCategoryName());
         b.putString("pmid",popularProducts.getMerchantAndProductId());
         b.putString("pid",popularProducts.getProductId());
+        b.putString("disc",popularProducts.getDescription());
+        b.putString("img1",popularProducts.getUrl1());
+        b.putString("img2",popularProducts.getUrl2());
+        b.putString("img3",popularProducts.getUrl3());
+        b.putInt("price",popularProducts.getPrice());
+        b.putInt("dprice",popularProducts.getSellingPrice());
+        b.putDouble("rating",popularProducts.getProductRating());
+        b.putString("name",popularProducts.getProductName());
+
         intent.putExtras(b);
         startActivity(intent);
         finish();

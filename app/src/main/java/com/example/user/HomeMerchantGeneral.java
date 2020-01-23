@@ -2,7 +2,6 @@ package com.example.user;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,17 +9,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.Adaptor.CategoryAdaptor;
 import com.example.user.Adaptor.PopularAdaptor;
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.GetCategories;
-import com.example.user.pogo.PopularProducts;
+import com.example.user.pojo.GetCategories;
+import com.example.user.pojo.PopularProducts;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
@@ -28,7 +26,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class HomeMerchantGeneral extends AppCompatActivity implements CategoryAdaptor.CategoryCommunication, PopularAdaptor.PopularCommunication {
 
@@ -115,11 +112,15 @@ public class HomeMerchantGeneral extends AppCompatActivity implements CategoryAd
                         SharedPreferences sharedPreferences=getSharedPreferences("email access", Context.MODE_PRIVATE);
                         if(sharedPreferences.getBoolean("flag",false)){
 
+                            Log.d("dasd", "onNavigationItemSelected: ");
+
                             startActivity(new Intent(HomeMerchantGeneral.this,UserDetailsActivity.class));
 
                         }
-                        else
-                            startActivity(new Intent(HomeMerchantGeneral.this,SignInActivity.class));
+                        else {
+                            startActivity(new Intent(HomeMerchantGeneral.this, SignInActivity.class));
+                            Log.d("dasdas", "secound: ");
+                        }
                         overridePendingTransition(0,0);
                         return true;
 
@@ -146,8 +147,16 @@ public class HomeMerchantGeneral extends AppCompatActivity implements CategoryAd
         Intent intent=new Intent(HomeMerchantGeneral.this,ProductActivity.class);
         Bundle b=new Bundle();
         b.putString("catName",popularProducts.getCategoryName());
-        b.putString("pid",popularProducts.getProductId());
         b.putString("pmid",popularProducts.getMerchantAndProductId());
+        b.putString("pid",popularProducts.getProductId());
+        b.putString("disc",popularProducts.getDescription());
+        b.putString("img1",popularProducts.getUrl1());
+        b.putString("img2",popularProducts.getUrl2());
+        b.putString("img3",popularProducts.getUrl3());
+        b.putInt("price",popularProducts.getPrice());
+        b.putInt("dprice",popularProducts.getSellingPrice());
+        b.putDouble("rating",popularProducts.getProductRating());
+        b.putString("name",popularProducts.getProductName());
         intent.putExtras(b);
         startActivity(intent);
     }

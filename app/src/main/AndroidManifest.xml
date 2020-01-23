@@ -12,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProductActivity"></activity>
+        <activity android:name=".FinishActivity"></activity>
+        <activity android:name=".SelectMerchant" />
+        <activity android:name=".ProductActivity" />
         <activity android:name=".CategoryDisplayActivity" />
-        <activity android:name=".PaymentActivity" />
         <activity android:name=".EmailVerificationActivity" />
         <activity android:name=".UserDetailsActivity" />
         <activity android:name=".CartActivity" />
@@ -23,7 +24,6 @@
         <activity android:name=".DummyActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".HomeMerchantGeneral" />
-        <activity android:name=".MovieAdapter" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashScreen">

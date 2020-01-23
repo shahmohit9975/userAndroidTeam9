@@ -12,10 +12,9 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.BooleanResponse;
-import com.example.user.pogo.GetOtp;
-import com.example.user.pogo.LoginDetails;
-import com.example.user.pogo.VerifyOtp;
+import com.example.user.pojo.GetOtp;
+import com.example.user.pojo.LoginDetails;
+import com.example.user.pojo.VerifyOtp;
 
 import retrofit2.Call;
 import retrofit2.Callback;

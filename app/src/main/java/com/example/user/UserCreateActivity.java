@@ -11,9 +11,8 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.UserDetails;
+import com.example.user.pojo.UserDetails;
 
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,4 +1,4 @@
-package com.example.user.pogo;
+package com.example.user.pojo;
 
 import com.google.gson.annotations.SerializedName;
 

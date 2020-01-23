@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.UserDetails;
+import com.example.user.pojo.UserDetails;
 
 import retrofit2.Call;
 import retrofit2.Callback;

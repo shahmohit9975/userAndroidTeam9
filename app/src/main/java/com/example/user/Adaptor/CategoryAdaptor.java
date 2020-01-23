@@ -5,12 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.R;
-import com.example.user.pogo.GetCategories;
+import com.example.user.pojo.GetCategories;
 
 import java.util.List;
 
@@ -57,13 +58,13 @@ public class CategoryAdaptor extends RecyclerView.Adapter<CategoryAdaptor.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout linearLayout;
-        EditText categoryName;
+        TextView categoryName;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             linearLayout=(LinearLayout)itemView.findViewById(R.id.categoryLinear);
-            categoryName=(EditText)itemView.findViewById(R.id.categoriesEdit);
+            categoryName=itemView.findViewById(R.id.merchantEdit);
         }
     }
 

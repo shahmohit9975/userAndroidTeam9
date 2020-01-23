@@ -25,5 +25,12 @@
     <string name="sellPrice">Sell Price</string>
     <string name="merchantRating">RATINGS</string>
     <string name="AddToCart">ADD TO CART</string>
+    <string name="selectDifferentMerchant">SELECT MERCHANT</string>
+    <string name="orginalPrice">Orginal Price</string>
+    <string name="storePrice">Store Price</string>
+    <string name="more">more....</string>
+    <string name="buymore">BUY MORE</string>
+    <string name="total">YOU HAVE PAID</string>
+    <string name="rupees">₹</string>
     <!--    <string name="splash_screen">SplashScreen</string>-->
 </resources>

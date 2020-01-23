@@ -5,15 +5,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.R;
-import com.example.user.pogo.PopularProducts;
+import com.example.user.pojo.PopularProducts;
 
 import java.util.List;
 
@@ -46,6 +46,7 @@ public class PopularAdaptor extends RecyclerView.Adapter<PopularAdaptor.ViewHold
         int sr=list.get(position).getSellingPrice();
         holder.price.setText(" "+pr+" ");
         holder.sellPrice.setText(" "+sr+" ");
+        holder.ratingBar.setRating((float)list.get(position).getProductRating());
         Glide.with(holder.image.getContext()).load(list.get(position).getUrl1()).into(holder.image);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +68,7 @@ public class PopularAdaptor extends RecyclerView.Adapter<PopularAdaptor.ViewHold
         public TextView name;
         public TextView price;
         public TextView sellPrice;
+        public RatingBar ratingBar;
         public LinearLayout linearLayout;
 
         public ViewHolder(@NonNull View itemView) {
@@ -76,7 +78,8 @@ public class PopularAdaptor extends RecyclerView.Adapter<PopularAdaptor.ViewHold
             this.image=itemView.findViewById(R.id.popularImage);
             this.price=itemView.findViewById(R.id.popularPrice);
             this.sellPrice=itemView.findViewById(R.id.sellPrice);
-            this.linearLayout=itemView.findViewById(R.id.popularLinear);
+            this.ratingBar=itemView.findViewById(R.id.ratingView);
+            this.linearLayout=itemView.findViewById(R.id.orderLinear);
 
 
         }

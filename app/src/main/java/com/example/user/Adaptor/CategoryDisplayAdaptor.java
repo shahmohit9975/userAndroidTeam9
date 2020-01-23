@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.R;
-import com.example.user.pogo.PopularProducts;
+import com.example.user.pojo.PopularProducts;
 
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class CategoryDisplayAdaptor extends RecyclerView.Adapter<CategoryDisplay
             this.image=itemView.findViewById(R.id.popularImage);
             this.price=itemView.findViewById(R.id.popularPrice);
             this.sellPrice=itemView.findViewById(R.id.sellPrice);
-            this.linearLayout=itemView.findViewById(R.id.popularLinear);
+            this.linearLayout=itemView.findViewById(R.id.orderLinear);
         }
     }
 

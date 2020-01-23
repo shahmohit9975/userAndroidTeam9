@@ -10,10 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
-import com.example.user.api.App;
-import com.example.user.pogo.BooleanResponse;
-import com.example.user.pogo.GetOtp;
-import com.example.user.pogo.VerifyOtp;
+import com.example.user.api.App3;
+import com.example.user.pojo.GetOtp;
+import com.example.user.pojo.VerifyOtp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +29,7 @@ public class EmailVerificationActivity extends AppCompatActivity {
 
         final EditText email=findViewById(R.id.emailEditText);
         final Button sendOtp=findViewById(R.id.otpButtton);
-        final Button verifyotp=findViewById(R.id.verifyOtp);
+        final Button verifyOtp=findViewById(R.id.verifyOtp);
         final EditText otpEditText=findViewById(R.id.OtpEditText);
 
 
@@ -42,18 +41,22 @@ public class EmailVerificationActivity extends AppCompatActivity {
 
                 GetOtp getOtp=new GetOtp();
                 getOtp.setEmail(email.getText().toString());
+//                sendOtp.setVisibility(View.INVISIBLE);
+//                otpEditText.setVisibility(View.VISIBLE);
+//                verifyotp.setVisibility(View.VISIBLE);
 
-                APIInterface apiInterface= App.getClient().create(APIInterface.class);
+                APIInterface apiInterface= App3.getClient().create(APIInterface.class);
                 apiInterface.sendotp(getOtp).enqueue(new Callback<VerifyOtp>() {
                     @Override
                     public void onResponse(Call<VerifyOtp> call, Response<VerifyOtp> response) {
                         sendOtp.setVisibility(View.INVISIBLE);
                         otpEditText.setVisibility(View.VISIBLE);
-                        verifyotp.setVisibility(View.VISIBLE);
+                        verifyOtp.setVisibility(View.VISIBLE);
+                        if (response.body() == null) throw new AssertionError();
                         otp=response.body().getOtp();
 
 
-                        Toast.makeText(EmailVerificationActivity.this," "+otp+" ",Toast.LENGTH_SHORT);
+                        Toast.makeText(EmailVerificationActivity.this," "+otp+" ",Toast.LENGTH_LONG);
 
                     }
 
@@ -67,9 +70,11 @@ public class EmailVerificationActivity extends AppCompatActivity {
             }
         });
 
-        verifyotp.setOnClickListener(new View.OnClickListener() {
+        verifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
                 if(otpEditText.getText().toString().equals(otp)){
                     Intent intent=new Intent(EmailVerificationActivity.this,UserCreateActivity.class);

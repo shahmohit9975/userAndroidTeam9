@@ -1,27 +1,26 @@
 package com.example.user.api;
 
-import androidx.cardview.widget.CardView;
-
-import com.example.user.pogo.GetCategories;
-import com.example.user.pogo.GetOtp;
-import com.example.user.pogo.LoginRes;
-import com.example.user.pogo.LoginResponse;
-import com.example.user.pogo.PopularProducts;
-import com.example.user.pogo.ProductReact;
-import com.example.user.pogo.UserDetails;
-import com.example.user.pogo.BooleanResponse;
-import com.example.user.pogo.LoginDetails;
-import com.example.user.pogo.VerifyOtp;
+import com.example.user.pojo.CartDetails;
+import com.example.user.pojo.CartDetailsResponse;
+import com.example.user.pojo.GetCategories;
+import com.example.user.pojo.GetOtp;
+import com.example.user.pojo.LoginRes;
+import com.example.user.pojo.PopularProducts;
+import com.example.user.pojo.ProductReact;
+import com.example.user.pojo.UserDetails;
+import com.example.user.pojo.BooleanResponse;
+import com.example.user.pojo.LoginDetails;
+import com.example.user.pojo.VerifyOtp;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface APIInterface {
 
@@ -49,15 +48,21 @@ public interface APIInterface {
     @POST("/user/addProfile")
     Call<Response<Boolean>> createnewuser(@Body UserDetails userDetails);
 
-    @GET("/bins/1eg5iu")
+    //@GET("/bins/1eg5iu")
+    @GET("/category/getAll")
     Call<List<GetCategories>> getCategories();
 
-    @GET("/bins/11b47a")
+    //@GET("/bins/11b47a")
+    @GET("/category/getAllProductsByRating")
     Call<List<PopularProducts>> getPopular();
 
-    @GET("/bins/11b47a")
+    //@GET("/bins/11b47a")
+    @GET("/category/getAllProductsByRating")
     Call<List<PopularProducts>> getCategoryProducts();
 
-    @POST("/get/prod")
+    @POST("/merchantAndProduct/get/product")
     Call<PopularProducts> getProductInfo(ProductReact productReact);
+
+    @PUT("/cart/add")
+    Call<CartDetailsResponse> addToCart(CartDetails cartDetails);
 }

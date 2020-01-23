@@ -12,8 +12,8 @@
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true">
-    <EditText
-        android:id="@+id/categoriesEdit"
+    <TextView
+        android:id="@+id/merchantEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"

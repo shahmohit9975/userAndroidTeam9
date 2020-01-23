@@ -17,10 +17,8 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
-import com.example.user.pogo.BooleanResponse;
-import com.example.user.pogo.LoginDetails;
-import com.example.user.pogo.LoginRes;
-import com.example.user.pogo.LoginResponse;
+import com.example.user.pojo.LoginDetails;
+import com.example.user.pojo.LoginRes;
 import com.facebook.CallbackManager;
 
 import com.facebook.login.widget.LoginButton;
@@ -129,7 +127,7 @@ public class SignInActivity extends AppCompatActivity {
 
                         LoginRes loginRes=response.body();
                         if(loginRes.isLoginStatus()){
-                            Intent intent=new Intent(SignInActivity.this,HomeMerchantGeneral.class);
+                            Intent intent=new Intent(SignInActivity.this,DummyActivity.class);
                             startActivity(intent);
                             Toast.makeText(SignInActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
                             SharedPreferences sharedPreferences=getSharedPreferences("email access",Context.MODE_PRIVATE);
@@ -203,7 +201,7 @@ public class SignInActivity extends AppCompatActivity {
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Intent intent = new Intent(SignInActivity.this, DummyActivity.class);
+            Intent intent = new Intent(SignInActivity.this, HomeMerchantGeneral.class);
             startActivity(intent);
         } catch (ApiException e) {
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
