@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductDescriptionActivity">
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/product_image"
+        android:layout_width="181dp"
+        android:layout_height="262dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="60dp"
+        app:auto_cycle="true"
+        app:corner_radius="20"
+        app:delay="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:period="1000" />
+
+    <ImageButton
+        android:id="@+id/add"
+        android:layout_width="34dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/plus"
+        app:layout_constraintBottom_toBottomOf="@+id/product_image"
+        app:layout_constraintEnd_toStartOf="@+id/remove"
+        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintTop_toBottomOf="@+id/quantity" />
+
+    <ImageButton
+        android:id="@+id/remove"
+        android:layout_width="37dp"
+        android:layout_height="49dp"
+        android:src="@drawable/minus"
+        app:layout_constraintBottom_toBottomOf="@+id/addtocart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintStart_toEndOf="@+id/addtocart"
+        app:layout_constraintTop_toTopOf="@+id/add"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/addtocart"
+        android:layout_width="126dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="16dp"
+        android:text="ADD TO CART"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_image"
+        app:layout_constraintVertical_bias="0.222" />
+
+    <Button
+        android:id="@+id/buynow"
+        android:layout_width="91dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:text="BUY NOW"
+        app:layout_constraintStart_toEndOf="@+id/addtocart"
+        app:layout_constraintTop_toBottomOf="@+id/product_image" />
+
+    <TextView
+        android:id="@+id/productname"
+        android:layout_width="155dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="316dp"
+        android:text="PRODUCT NAME"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/merchant"
+        app:layout_constraintStart_toEndOf="@+id/product_image" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_width="90dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintTop_toBottomOf="@+id/merchant" />
+
+    <Button
+        android:id="@+id/merchant"
+        android:layout_width="157dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="292dp"
+        android:text="Select Merchant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintStart_toStartOf="@+id/productname" />
+</androidx.constraintlayout.widget.ConstraintLayout>

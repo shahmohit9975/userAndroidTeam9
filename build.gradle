@@ -17,6 +17,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://jitpack.io' }
         mavenCentral()
         google()
                 // If you're using a version of Gradle lower than 4.1, you must instead use:
@@ -24,7 +25,9 @@ allprojects {
                     url 'https://maven.google.com'
                 }
 
-        jcenter()
+        jcenter(){
+            maven { url 'https://jitpack.io' }//image
+        }
         
     }
 }

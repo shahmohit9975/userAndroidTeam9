@@ -8,15 +8,16 @@ public class App {
 
     static Retrofit retrofit;
 
-    public static Retrofit getClient(){
-        OkHttpClient client = new OkHttpClient.Builder().build();
-
-        retrofit=new Retrofit.Builder()
-                .baseUrl("http://192.168.43.203:8081")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            OkHttpClient client = new OkHttpClient.Builder().build();
+            retrofit = new Retrofit.Builder()
+                    .baseUrl("http://172.16.20.149:8080")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .client(client)
+                    .build();
+        }
         return retrofit;
     }
+
 }

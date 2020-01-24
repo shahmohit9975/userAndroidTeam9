@@ -1,9 +1,11 @@
 package com.example.user.api;
 
+import com.example.user.ProductDTO;
 import com.example.user.pogo.GetCategories;
 import com.example.user.pogo.GetOtp;
 import com.example.user.pogo.LoginRes;
 import com.example.user.pogo.LoginResponse;
+import com.example.user.pogo.SearchString;
 import com.example.user.pogo.UserDetails;
 import com.example.user.pogo.BooleanResponse;
 import com.example.user.pogo.LoginDetails;
@@ -47,5 +49,8 @@ public interface APIInterface {
 
     @GET("/category/getAll")
     Call<List<GetCategories>> getCategories();
+
+    @POST("/bySearchIn")
+    Call<List<ProductDTO>> getSearchResults(@Body SearchString searchQuery);
 
 }
