@@ -2,8 +2,10 @@ package com.example.user.pojo;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class GetCategories{
+
+public class GetCategories implements Serializable {
 
 	@SerializedName("_id")
 	private String id;

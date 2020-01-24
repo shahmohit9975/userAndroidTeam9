@@ -2,7 +2,9 @@ package com.example.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,7 +49,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 GetOtp getOtp=new GetOtp();
                 getOtp.setEmail(email.toString());
 
-                apiInterface.sendotp(getOtp).enqueue(new Callback<VerifyOtp>() {
+                SharedPreferences sharedPreferences=getSharedPreferences("emailAccess", Context.MODE_PRIVATE);
+
+                apiInterface.sendotp(sharedPreferences.getString("email",null),getOtp).enqueue(new Callback<VerifyOtp>() {
                     @Override
                     public void onResponse(Call<VerifyOtp> call, Response<VerifyOtp> response) {
                         /*if(response.body()) {

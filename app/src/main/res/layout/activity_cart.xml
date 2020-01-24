@@ -8,23 +8,24 @@
     tools:context=".CartActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="468dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+
         <TextView
             android:id="@+id/totalAmount"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:gravity="center"
-            android:textSize="40dp"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            ></TextView>
-
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40dp"
+            android:textStyle="bold"></TextView>
 
         <Button
             android:id="@+id/proceedToPay"
@@ -32,5 +33,14 @@
             android:layout_height="100dp"
             android:text="@string/proceedToPay"/>
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:backgroundTint="@android:color/black"
+        app:menu="@menu/menu_navigation"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>

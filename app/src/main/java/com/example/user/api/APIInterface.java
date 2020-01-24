@@ -1,7 +1,15 @@
 package com.example.user.api;
 
+import android.content.SharedPreferences;
+
+import com.example.user.pojo.CartCall;
+import com.example.user.pojo.CartChangeReact;
+import com.example.user.pojo.CartChangeResponse;
+import com.example.user.pojo.CartDeleteReact;
+import com.example.user.pojo.CartDeleteResponse;
 import com.example.user.pojo.CartDetails;
 import com.example.user.pojo.CartDetailsResponse;
+import com.example.user.pojo.CartResponse;
 import com.example.user.pojo.GetCategories;
 import com.example.user.pojo.GetOtp;
 import com.example.user.pojo.LoginRes;
@@ -18,16 +26,22 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface APIInterface {
 
+
+
+
     @POST("/user/login")
     Call<LoginRes> login(@Body LoginDetails loginDetails);
 
-    @GET("https://api.myjson.com/bins/17n256")
+    @GET("/")
     Call<UserDetails> userdetails();
 
     @GET("/google/login")
@@ -37,7 +51,7 @@ public interface APIInterface {
     Call<Boolean> flogin();
 
     @POST("/otp/get")
-    Call<VerifyOtp> sendotp(@Body GetOtp getOtp);
+    Call<VerifyOtp> sendotp(@Header("dnamic-header") String header,@Body GetOtp getOtp);
 
     @GET("/verifyotp")
     Call<BooleanResponse> verifyOtp(@Body VerifyOtp verifyOtp);
@@ -65,4 +79,14 @@ public interface APIInterface {
 
     @PUT("/cart/add")
     Call<CartDetailsResponse> addToCart(CartDetails cartDetails);
+
+    @GET("/cart/get")
+    Call<List<CartResponse>> getCart(CartCall cartCall);
+
+    @PUT("/cart/add")
+    Call<CartChangeResponse> changeCart(CartChangeReact cartChangeReact);
+
+    @DELETE("/cart/delete")
+    Call<CartDeleteResponse> deleteCart(CartDeleteReact cartDeleteReact);
+
 }

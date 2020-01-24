@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.api.App2;
 import com.example.user.pojo.LoginDetails;
 import com.example.user.pojo.LoginRes;
 import com.facebook.CallbackManager;
@@ -31,9 +33,14 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
 
+import java.util.List;
+
+import okhttp3.Headers;
+import okhttp3.internal.http.HttpHeaders;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Header;
 
 
 public class SignInActivity extends AppCompatActivity {
@@ -119,23 +126,33 @@ public class SignInActivity extends AppCompatActivity {
                 LoginDetails loginDetails = new LoginDetails();
                 loginDetails.setUserEmail(email.getText().toString());
                 loginDetails.setUserPasssword(password.getText().toString());
-                APIInterface apiInterface = App.getClient().create(APIInterface.class);
+                APIInterface apiInterface = App2.getClient().create(APIInterface.class);
 
                 apiInterface.login(loginDetails).enqueue(new Callback<LoginRes>() {
                     @Override
                     public void onResponse(Call<LoginRes> call, Response<LoginRes> response) {
 
                         LoginRes loginRes=response.body();
+                        Headers headers=response.headers();
+
+                        Log.d(TAG, "onResponse: "+response.headers());
+                        Log.d(TAG, "onResponse: "+response.code());
+                        String cookie=response.headers().get("Set-Cookie");
+                        Log.d(TAG, "onResponse: "+cookie);
+
+
+                        Toast.makeText(SignInActivity.this,cookie,Toast.LENGTH_LONG).show();
                         if(loginRes.isLoginStatus()){
-                            Intent intent=new Intent(SignInActivity.this,DummyActivity.class);
-                            startActivity(intent);
+                            Intent intent=new Intent(SignInActivity.this,HomeMerchantGeneral.class);
                             Toast.makeText(SignInActivity.this,"done!!! ",Toast.LENGTH_SHORT).show();
-                            SharedPreferences sharedPreferences=getSharedPreferences("email access",Context.MODE_PRIVATE);
+                            SharedPreferences sharedPreferences=getSharedPreferences("emailAccess",Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
                             editor.putBoolean("flag",true);
                             editor.putString("email",email.getText().toString());
                             editor.commit();
                             editor.apply();
+                            startActivity(intent);
+                            finish();
                         }
                         else {
                             Toast.makeText(SignInActivity.this,"wrong password!!! ",Toast.LENGTH_SHORT).show();

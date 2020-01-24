@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.user.api.APIInterface;
 import com.example.user.api.App;
+import com.example.user.api.App2;
 import com.example.user.pojo.UserDetails;
 
 import retrofit2.Call;
@@ -32,7 +33,9 @@ public class UserDetailsActivity extends AppCompatActivity {
 
 
 
-        APIInterface apiInterface= App.getClient().create(APIInterface.class);
+        APIInterface apiInterface= App2.getClient().create(APIInterface.class);
+
+        SharedPreferences sharedPreferences=getSharedPreferences("userAccess",Context.MODE_PRIVATE);
 
         apiInterface.userdetails().enqueue(new Callback<UserDetails>() {
             @Override
@@ -57,7 +60,7 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                SharedPreferences sharedPreferences=getSharedPreferences("email access", Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences=getSharedPreferences("emailAccess", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=sharedPreferences.edit();
                 editor.putBoolean("flag",true);
                 editor.commit();

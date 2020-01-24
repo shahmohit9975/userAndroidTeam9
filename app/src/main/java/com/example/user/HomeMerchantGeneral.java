@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.user.Adaptor.CategoryAdaptor;
@@ -43,7 +44,7 @@ public class HomeMerchantGeneral extends AppCompatActivity implements CategoryAd
         setContentView(R.layout.activity_home_merchant_general);
 
         layoutManager=new LinearLayoutManager(this);
-        layoutManager2 = new LinearLayoutManager(this);
+        layoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
         recyclerView = findViewById(R.id.recycler1);
         recyclerView2=findViewById(R.id.recycler2);
         recyclerView.setLayoutManager(layoutManager);
@@ -109,7 +110,7 @@ public class HomeMerchantGeneral extends AppCompatActivity implements CategoryAd
                         return true;
 
                     case R.id.user_account:
-                        SharedPreferences sharedPreferences=getSharedPreferences("email access", Context.MODE_PRIVATE);
+                        SharedPreferences sharedPreferences=getSharedPreferences("emailAccess", Context.MODE_PRIVATE);
                         if(sharedPreferences.getBoolean("flag",false)){
 
                             Log.d("dasd", "onNavigationItemSelected: ");

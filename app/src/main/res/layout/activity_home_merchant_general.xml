@@ -36,7 +36,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler1"
         android:layout_width="406dp"
-        android:layout_height="169dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/toppicks"
@@ -62,7 +62,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler2"
         android:layout_width="412dp"
-        android:layout_height="238dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
