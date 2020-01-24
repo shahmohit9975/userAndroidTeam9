@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="api.App"
         android:allowBackup="true"
         android:icon="@drawable/t9logo"
         android:label="@string/app_name"
@@ -15,7 +14,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ProductList"></activity>
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SelectMerchantActivity" />
         <activity android:name=".ProductDescriptionActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".EmailVerificationActivity" />
